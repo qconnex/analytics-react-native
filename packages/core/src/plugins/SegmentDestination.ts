@@ -36,7 +36,7 @@ export class SegmentDestination extends DestinationPlugin {
     );
 
     let sentEvents: SegmentEvent[] = [];
-    let numFailedEvents = 0;
+    //let numFailedEvents = 0;
 
     await Promise.all(
       chunkedEvents.map(async (batch: SegmentEvent[]) => {
@@ -47,8 +47,8 @@ export class SegmentDestination extends DestinationPlugin {
           });
           sentEvents = sentEvents.concat(batch);
         } catch (e) {
-          console.warn(e);
-          numFailedEvents += batch.length;
+          //console.warn(e);
+          //numFailedEvents += batch.length;
         } finally {
           this.analytics?.removeEvents(sentEvents);
         }
@@ -61,8 +61,8 @@ export class SegmentDestination extends DestinationPlugin {
       }
     }
 
-    if (numFailedEvents) {
+/*     if (numFailedEvents) {
       console.error(`Failed to send ${numFailedEvents} events.`);
-    }
+    } */
   }
 }
